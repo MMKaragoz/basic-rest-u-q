@@ -1,19 +1,36 @@
 package com.project.ama.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
+
 @Entity
-@Table(name = "user")
+@Table(name = "users")
+
 public class User {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 	
-	String username;
+	@Column(nullable = false, unique = true)
+	String userName;
 	
+	@Column(nullable = false)
 	String password;
+	
+	public User() {
+	}
+
+	public User(String userName, String password) {
+		this.userName = userName;
+		this.password = password;
+	}
 
 	public Long getId() {
 		return id;
@@ -23,12 +40,12 @@ public class User {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getPassword() {
@@ -38,6 +55,13 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + this.id + ", userName=" + this.userName + ", password=" + this.password + "]";
+	}
 	
 	
+	
+
 }
