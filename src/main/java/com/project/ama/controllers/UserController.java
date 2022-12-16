@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.ama.dto.UserGetResponse;
 import com.project.ama.entities.User;
-import com.project.ama.responses.UserGetResponse;
 import com.project.ama.services.UserService;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/v1/users")
 public class UserController {
 	
 	private UserService userService;
@@ -43,7 +43,7 @@ public class UserController {
 	
 	@GetMapping("/{userId}")
 	public UserGetResponse getOneUser(@PathVariable Long userId) {
-		return userService.getOneUser(userId);
+		return userService.getOneUserById(userId);
 	}
 	
 	@PutMapping("/{userId}")

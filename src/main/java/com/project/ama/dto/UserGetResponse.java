@@ -1,4 +1,4 @@
-package com.project.ama.responses;
+package com.project.ama.dto;
 
 import com.project.ama.entities.User;
 
