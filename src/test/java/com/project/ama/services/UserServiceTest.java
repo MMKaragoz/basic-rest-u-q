@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import com.project.ama.dto.UserGetResponse;
+import com.project.ama.dto.GetUserResponse;
 import com.project.ama.dto.converter.UserDtoConverter;
 import com.project.ama.entities.User;
 import com.project.ama.exceptions.UserNotFoundException;
@@ -51,12 +51,12 @@ public class UserServiceTest {
 	@Test
 	public void testGetOneUserById_whenUserIdExists_shouldReturnUserGetResponse() {
 		User user = new User(0L, "name", "password");
-		UserGetResponse userGetResponse = new UserGetResponse(user);
+		GetUserResponse userGetResponse = new GetUserResponse(user);
 		
 		Mockito.when(userRepository.findById(0L)).thenReturn(Optional.of(user));
 		Mockito.when(converter.convertToUserDtoWhenGetResponse(user)).thenReturn(userGetResponse);
 		
-		UserGetResponse result = service.getOneUserById(0L);
+		GetUserResponse result = service.getOneUserById(0L);
 		
 		assertEquals(result, userGetResponse);
 	}

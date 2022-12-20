@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.project.ama.dto.UserGetResponse;
+import com.project.ama.dto.GetUserResponse;
 import com.project.ama.dto.converter.UserDtoConverter;
 import com.project.ama.entities.User;
 import com.project.ama.exceptions.UserNotFoundException;
@@ -47,17 +47,17 @@ public class UserService {
 		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	public UserGetResponse getOneUserById(Long userId) {		
+	public GetUserResponse getOneUserById(Long userId) {		
 		return converter.convertToUserDtoWhenGetResponse(findOneUserById(userId));
 	}
 
 	public ResponseEntity<Void> updateOneUser(Long userId, User newUser) {
-		User userToBeUpdated = findOneUserById(userId);
+		User toUpdate = findOneUserById(userId);
 		
-		userToBeUpdated.setUserName(newUser.getUserName());
-		userToBeUpdated.setPassword(newUser.getPassword());
+		toUpdate.setUserName(newUser.getUserName());
+		toUpdate.setPassword(newUser.getPassword());
 			
-		saveOneUser(userToBeUpdated);
+		saveOneUser(toUpdate);
 			
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
@@ -65,5 +65,6 @@ public class UserService {
 	public void deleteOneUserById(Long userId) {
 		userRepository.deleteById(userId);
 	}
+
 	
 }

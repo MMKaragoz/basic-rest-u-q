@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.ama.dto.UserGetResponse;
+import com.project.ama.dto.GetUserResponse;
 import com.project.ama.entities.User;
 import com.project.ama.services.UserService;
 
@@ -21,7 +21,7 @@ import com.project.ama.services.UserService;
 @RequestMapping("/v1/users")
 public class UserController {
 	
-	private UserService userService;
+	private final UserService userService;
 	
 	public UserController(UserService userService) {
 		this.userService = userService;
@@ -30,8 +30,8 @@ public class UserController {
 	// -- "/" --
 	
 	@GetMapping
-	public List<UserGetResponse> getAllUsers() {
-		return userService.getAllUsers().stream().map(user -> new UserGetResponse(user)).collect(Collectors.toList());
+	public List<GetUserResponse> getAllUsers() {
+		return userService.getAllUsers().stream().map(user -> new GetUserResponse(user)).collect(Collectors.toList());
 	}
 	
 	@PostMapping
@@ -42,7 +42,7 @@ public class UserController {
 	// -- "/{userId}" --
 	
 	@GetMapping("/{userId}")
-	public UserGetResponse getOneUser(@PathVariable Long userId) {
+	public GetUserResponse getOneUser(@PathVariable Long userId) {
 		return userService.getOneUserById(userId);
 	}
 	
@@ -52,8 +52,8 @@ public class UserController {
 	}
 	
 	@DeleteMapping("/{userId}")
-	public void deleteOneUser(@PathVariable Long userId) {
+	public void deleteOneUserById(@PathVariable Long userId) {
 		userService.deleteOneUserById(userId);
-	}
+	}	
 	
 }

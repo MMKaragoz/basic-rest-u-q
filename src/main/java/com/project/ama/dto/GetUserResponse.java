@@ -1,13 +1,16 @@
 package com.project.ama.dto;
 
+import java.util.Set;
+
+import com.project.ama.entities.Question;
 import com.project.ama.entities.User;
 
-public class UserGetResponse {
+public class GetUserResponse {
 
-	Long id;
-	String userName;
+	private Long id;
+	private String userName;
 	
-	public UserGetResponse(User userEntity) {
+	public GetUserResponse(User userEntity) {
 		this.id = userEntity.getId();
 		this.userName = userEntity.getUserName();
 	}
@@ -27,6 +30,8 @@ public class UserGetResponse {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
+	
 	
 	
 }
