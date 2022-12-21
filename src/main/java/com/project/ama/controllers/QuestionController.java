@@ -20,7 +20,7 @@ import com.project.ama.entities.Question;
 import com.project.ama.services.QuestionService;
 
 @RestController
-@RequestMapping("v1/questions")
+@RequestMapping("api/v1/questions")
 public class QuestionController {
 
 	private final QuestionService questionService;
@@ -39,13 +39,6 @@ public class QuestionController {
 		return questionService.createOneQuestion(request);
 	}
 	
-	// ----
-	
-	@GetMapping("/user")
-	public List<GetQuestionResponse> getAllQuestionsDependOnToWhomUserId(@RequestParam Long id) {
-		return questionService.getAllQuestionsDependOnToWhomUserId(id);
-	}
-	
 	// -- "/{questionId}" --
 	
 	@GetMapping("/{questionId}")
@@ -62,4 +55,13 @@ public class QuestionController {
 	public void deleteOneQuestionById(@PathVariable Long questionId) {
 		questionService.deleteOneQuestionById(questionId);
 	}
+	
+	// -- "/users/{userId}" --
+	
+	@GetMapping("/users/{userId}")
+	public List<GetQuestionResponse> getAllQuestionsDependOnToWhomUserId(@PathVariable Long userId) {
+		return questionService.getAllQuestionsDependOnToWhomUserId(userId);
+	}
+	
+	
 }

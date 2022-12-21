@@ -31,13 +31,13 @@ public class UserServiceTest {
 	
 	@Test
 	public void testFindOneUserById_whenUserIdExists_shouldReturnUser() {
-		User user = new User(0L, "name", "password");
+		User actual = new User(0L, "name", "password");
 		
-		Mockito.when(userRepository.findById(0L)).thenReturn(Optional.of(user));
+		Mockito.when(userRepository.findById(actual.getId())).thenReturn(Optional.of(actual));
 		
-		User result = service.findOneUserById(0L);
+		User expected = service.findOneUserById(actual.getId());
 		
-		assertEquals(result, user);
+		assertEquals(expected, actual);
 	}
 	
 	@Test
@@ -49,7 +49,7 @@ public class UserServiceTest {
 	}
 	
 	@Test
-	public void testGetOneUserById_whenUserIdExists_shouldReturnUserGetResponse() {
+	public void testGetOneUserById_whenUserIdExists_shouldReturnGetUserResponse() {
 		User user = new User(0L, "name", "password");
 		GetUserResponse userGetResponse = new GetUserResponse(user);
 		
